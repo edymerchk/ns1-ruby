@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "NS1"
+require 'webmock/rspec'
+require 'pry-byebug'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
