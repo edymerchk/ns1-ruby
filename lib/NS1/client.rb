@@ -1,10 +1,12 @@
 require 'NS1/api/zones'
+require 'NS1/api/records'
 require 'faraday'
 require 'oj'
 
 module NS1
   class Client
     include NS1::API::Zones
+    include NS1::API::Records
 
     API_ENDPOINT = "https://api.nsone.net/v1"
 

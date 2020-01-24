@@ -32,7 +32,7 @@ RSpec.describe NS1::API::Zones do
       }
     end
 
-    it 'makes a request to PUT /zones/sample.com with the expected body' do
+    it 'makes a request to PUT /zones/:zone with the expected body' do
       request = stub_ns1_api(:put, "zones/sample.com", expected_body.to_json)
 
       client.create_zone("sample.com", {nx_ttl: 60})
@@ -48,7 +48,7 @@ RSpec.describe NS1::API::Zones do
       }
     end
 
-    it 'makes a request to POST /zones/sample.com with the expected body' do
+    it 'makes a request to POST /zones/:zone with the expected body' do
       request = stub_ns1_api(:post, "zones/sample.com", expected_body.to_json)
 
       client.update_zone("sample.com", {refresh: 50})
@@ -65,11 +65,5 @@ RSpec.describe NS1::API::Zones do
 
       expect(request).to have_been_requested
     end
-  end
-
-  def stub_ns1_api(method, endpoint, body = nil)
-    stub_request(method, "#{NS1::Client::API_ENDPOINT}/#{endpoint}")
-      .with(body: body)
-      .to_return(status: 200, body: nil)
   end
 end
