@@ -5,6 +5,7 @@ module NS1
       BadRequestError = Class.new(NS1APIError)
       UnauthorizedError = Class.new(NS1APIError)
       NotFoundError = Class.new(NS1APIError)
+      ResponseParseError = Class.new(NS1APIError)
       ApiError = Class.new(NS1APIError)
     end
   end

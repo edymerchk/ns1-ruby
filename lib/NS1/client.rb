@@ -27,6 +27,9 @@ module NS1
       return parsed_response if response.status == HTTP_OK_CODE
 
       raise error_class(response.status), "Code: #{response.status}, response: #{response.body}"
+
+    rescue Oj::ParseError
+      raise ResponseParseError, "Code: #{response.status}, response: #{response.body}"
     end
 
     private
