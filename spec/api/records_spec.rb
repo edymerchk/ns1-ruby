@@ -25,7 +25,7 @@ RSpec.describe NS1::API::Zones do
     end
 
     it 'makes a request to PUT /zones/:zone/:domain/:type with the expected body' do
-      request = stub_ns1_api(:put, "zones/sample.com/www.sample.com/A", expected_body.to_json)
+      request = stub_ns1_api(:put, "zones/sample.com/www.sample.com/A", body: expected_body.to_json)
 
       client.create_record("sample.com", "www.sample.com", "A", {answers: [{answer: ["1.1.1.1"]}]})
 
@@ -41,7 +41,7 @@ RSpec.describe NS1::API::Zones do
     end
 
     it 'makes a request to POST /zones/:zone/:domain/:type with the expected body' do
-      request = stub_ns1_api(:post, "zones/sample.com/www.sample.com/A", expected_body.to_json)
+      request = stub_ns1_api(:post, "zones/sample.com/www.sample.com/A", body: expected_body.to_json)
 
       client.update_record("sample.com", "www.sample.com", "A", {answers: [{answer: ["2.2.2.2"]}]})
 
