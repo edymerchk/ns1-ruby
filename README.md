@@ -1,15 +1,14 @@
 # NS1
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/NS1`. To experiment with that code, run `bin/console` for an interactive prompt.
+[NS1](https://ns1.com/) Ruby Client
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'NS1'
+gem "ns1-ruby", '~> 0.1.0', require: 'NS1'
 ```
 
 And then execute:
@@ -18,11 +17,77 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install NS1
+    $ gem install ns1-ruby
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# Initialize client
+# Get your api-key from https://my.nsone.net/#/account/settings
+ns1_client = NS1::Client.new("api-key")
+```
+
+### Zones
+
+```ruby
+# Get all the zones
+ns1_client.zones
+
+# Get an zone
+ns1_client.zone("sample.dev")
+
+# Create zone
+# see full list of params on https://ns1.com/api#create-a-new-dns-zone
+params = {nx_ttl: 3600, ...}
+ns1_client.create_zone("sample.dev", params)
+
+# Update zone
+# see full list of params on https://ns1.com/api#post-modify-a-zone
+params = {refresh: 1200, ...}
+ns1_client.update_zone("sample.dev", params)
+
+# Delete zone
+ns1_client.delete_zone("sample.dev")
+```
+
+### Records
+```ruby
+# Get a record
+ns1_client.record("sample.dev", "www.sample.dev", "A")
+
+# Create record
+# see full list of params on https://ns1.com/api#putcreate-a-new-dns-record
+params = {answers: ["1,1,1,1"], ...}
+ns1_client.create_record("sample.dev", "www.sample.dev", "A", params)
+
+
+# Update record
+# see full list of params on https://ns1.com/api#postupdate-record-configuration
+params = {use_client_subnet: false, ...}
+ns1_client.update_record("sample.dev", "www.sample.dev", "A", params)
+
+# Delete record
+ns1_client.delete_record("sample.dev", "www.sample.dev", "A")
+
+```
+
+### Exceptions
+
+If an error occurs during an operation, one of the following exceptions will be raised, otherwise the operation will be considered successful and the response body will be returned
+
+```ruby
+NS1::API::Errors::BadRequestError
+NS1::API::Errors::UnauthorizedError
+NS1::API::Errors::NotFoundError
+NS1::API::Errors::ResponseParseError
+NS1::API::Errors::ApiError
+```
+
+### Future Work
+
+* Cover all the resources on the NS1 Api https://ns1.com/api
+* I think it will be interesting to create ruby objects for each entity, that way we can do something like: `ns1_client.zone("sample.dev").nx_ttl` and even `ns1_client.zone("sample.dev").records`
+
 
 ## Development
 
