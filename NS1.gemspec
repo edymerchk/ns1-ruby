@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "NS1/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "NS1"
+  spec.name          = "ns1-ruby"
   spec.version       = NS1::VERSION
   spec.authors       = ["Edy Laverde"]
   spec.email         = ["edyhack@gmail.com"]
